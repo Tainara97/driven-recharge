@@ -1,4 +1,4 @@
-import { createRecharge } from "../repositories/recharge-repository";
+import { createRecharge, findRechargesByNumber } from "../repositories/recharge-repository";
 import { RechargeData } from "../protocols/recharge-protocol";
 import { findByDocument, findPhoneById } from "../repositories/phone-repository";
 
@@ -16,3 +16,7 @@ export async function createRechargeService(rechargeData: RechargeData) {
     return newRecharge;
 }
 
+export async function getRechargesByNumberService(number: string) {
+    const recharges = await findRechargesByNumber(number);
+    return recharges;
+}

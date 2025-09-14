@@ -13,3 +13,14 @@ export async function createRecharge(rechargeData: RechargeData) {
     return result.rows[0];
 };
 
+export async function findRechargesByNumber(number: string) {
+    const result = await db.query<Recharge>(`
+        SELECT phone_id AS "phoneId", amount, created_at AS "createdAt"
+        FROM recharges 
+        JOIN phones on recharges.phone_id = phones.id
+        WHERE phone_number = $1
+    `, [number]);
+
+    return result.rows;
+}
+
