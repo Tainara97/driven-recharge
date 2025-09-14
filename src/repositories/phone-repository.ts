@@ -27,3 +27,11 @@ export async function findByDocument(document: string) {
 
     return result.rows;
 }
+
+export async function findPhoneById(phoneId: number) {
+    const result = await db.query<Phone>(`
+       SELECT * FROM phones WHERE id = $1
+    `, [phoneId]);
+
+    return result.rows[0];
+};

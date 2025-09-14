@@ -15,3 +15,8 @@ export async function createPhoneService(phoneData: PhoneData) {
     const newPhone = await createPhone(phoneData);
     return newPhone;
 }
+
+export async function getPhonesByDocumentService(document: string) {
+    const phones = await findByDocument(document);
+    return phones;
+}
