@@ -13,4 +13,6 @@ app.get("/health", (req: Request, res: Response) => {
 app.use(router);
 app.use(errorHandler);
 
-app.listen(5000, () => console.log("Server is up!"));
+const port = process.env.PORT || 5000
+
+app.listen(port, () => console.log("Server is up!"));
