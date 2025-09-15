@@ -1,6 +1,6 @@
 import { createRecharge, findRechargesByNumber } from "../repositories/recharge-repository";
 import { RechargeData } from "../protocols/recharge-protocol";
-import { findByDocument, findPhoneById } from "../repositories/phone-repository";
+import { findByNumber, findPhoneById } from "../repositories/phone-repository";
 
 export async function createRechargeService(rechargeData: RechargeData) {
     const existingPhone = await findPhoneById(rechargeData.phoneId);
@@ -17,6 +17,11 @@ export async function createRechargeService(rechargeData: RechargeData) {
 }
 
 export async function getRechargesByNumberService(number: string) {
+    const existingPhone = await findByNumber(number);
+    if (!existingPhone) {
+        throw { type: "notFound", message: "Phone number not found" };
+    }
+
     const recharges = await findRechargesByNumber(number);
     return recharges;
 }

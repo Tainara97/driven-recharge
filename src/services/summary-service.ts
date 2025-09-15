@@ -1,9 +1,9 @@
-import { Phone } from "../protocols/phone-protocol";
+import { PhoneWithCarrier } from "../protocols/phone-protocol";
 import { Recharge } from "../protocols/recharge-protocol";
 import { findPhonesByDocument, findRechargesByPhoneIds } from "../repositories/summary-repository";
 
 export async function getSummarybyDocumentService(document: string) {
-    const phones: (Phone & { carrierName: string })[] = await findPhonesByDocument(document);
+    const phones: PhoneWithCarrier[] = await findPhonesByDocument(document);
 
     const phoneIds = phones.map(phone => phone.id);
 
@@ -18,7 +18,7 @@ export async function getSummarybyDocumentService(document: string) {
             description: phone.description,
             carrier: {
                 carrierId: phone.carrierId,
-                carrierName: (phone as any).carrierName
+                carrierName: phone.carrierName
             },
             recharges: phoneRecharges
         };

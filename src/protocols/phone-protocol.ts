@@ -7,4 +7,6 @@ export type Phone = {
     document: string;
 }
 
+export type PhoneWithCarrier = Phone & { carrierName: string };
+
 export type PhoneData = Omit<Phone, "id">;
